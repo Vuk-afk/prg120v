@@ -2,7 +2,6 @@
 /*
 /*  Programmet skriver ut alle registrerte poststeder
 */
-  include("db-tilkobling.php");  /* tilkobling til database-serveren utf�rt og valg av database foretatt */
 
   $sqlSetning="SELECT * FROM poststed;";
   
