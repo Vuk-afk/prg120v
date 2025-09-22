@@ -5,8 +5,7 @@
 
   $sqlSetning="SELECT * FROM poststed;";
   
-  $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
-    /* SQL-setning sendt til database-serveren */
+
 	
   $antallRader=mysqli_num_rows($sqlResultat);  /* antall rader i resultatet beregnet */
 
