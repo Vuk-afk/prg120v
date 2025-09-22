@@ -1,42 +1,27 @@
-<?php
-// Default values
-$tall1 = $_POST["tall1"] ?? "";
-$tall2 = $_POST["tall2"] ?? "";
-$result = "";
+<?php  /* vis-alle-poststeder */
+/*
+/*  Programmet skriver ut alle registrerte poststeder
+*/
+  include("db-tilkobling.php");  /* tilkobling til database-serveren utf�rt og valg av database foretatt */
 
-// When the button is pressed, do the math
-if (isset($_POST["beregn"])) {
-    $t1 = (int)$tall1;
-    $t2 = (int)$tall2;
+  $sqlSetning="SELECT * FROM poststed;";
+  
+  $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
+    /* SQL-setning sendt til database-serveren */
+	
+  $antallRader=mysqli_num_rows($sqlResultat);  /* antall rader i resultatet beregnet */
 
-    $sum = $t1 + $t2;
-    $diff = $t1 - $t2;
+  print ("<h3>Registrerte poststeder</h3>");
+  print ("<table border=1>");  
+  print ("<tr><th align=left>postnr</th> <th align=left>poststed</th></tr>"); 
 
-    $result = "Tall 1 er $t1 <br>
-               Tall 2 er $t2 <br>
-               Summen er $sum <br>
-               Differansen er $diff";
-}
+  for ($r=1;$r<=$antallRader;$r++)
+    {
+      $rad=mysqli_fetch_array($sqlResultat);  /* ny rad hentet fra sp�rringsresultatet */
+      $postnr=$rad["postnr"];        /* ELLER $postnr=$rad[0]; */
+      $poststed=$rad["poststed"];    /* ELLER $poststed=$rad[1]; */
+
+      print ("<tr> <td> $postnr </td> <td> $poststed </td> </tr>");
+    }
+  print ("</table>"); 
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>PHP kalkulator</title>
-</head>
-<body>
-    <h2>Legg inn to tall</h2>
-    <form method="POST">
-        <label for="tall1">Tall 1:</label>
-        <input type="number" name="tall1" value="<?php echo htmlspecialchars($tall1); ?>">
-        <br><br>
-        <label for="tall2">Tall 2:</label>
-        <input type="number" name="tall2" value="<?php echo htmlspecialchars($tall2); ?>">
-        <br><br>
-        <button type="submit" name="beregn">Beregn</button>
-    </form>
-
-    <h3>Resultat:</h3>
-    <p><?php echo $result; ?></p>
-</body>
-</html>
