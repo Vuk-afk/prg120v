@@ -7,7 +7,6 @@
   <h3>Eksempel 1</h3>
 
   <?php
-  // sjekk om skjemaet er sendt inn
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $fornavn = $_POST["fornavn"];
       $etternavn = $_POST["etternavn"];
@@ -17,10 +16,11 @@
   ?>
 
   <form method="post" action="">
-    Fornavn <input type="text" id="fornavn" name="fornavn" required /> <br />
-    Etternavn <input type="text" id="etternavn" name="etternavn" required /> <br />
+    Fornavn <input type="text" id="fornavn" name="fornavn" required value="Vuk" /> <br />
+    Etternavn <input type="text" id="etternavn" name="etternavn" required value="Ste" /> <br />
     <input type="submit" value="Fortsett" id="fortsett" name="fortsett" />
     <input type="reset" value="Nullstill" name="nullstill" id="nullstill" /> <br />
   </form>
 </body>
 </html>
+
